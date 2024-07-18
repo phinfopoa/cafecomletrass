@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'cadastro_repository.dart';
 import 'cadastro_user.dart';
-import 'package:cafecomletras/paginaInicial.dart'; // Importe a página inicial aqui, substitua pelo nome correto do arquivo
+import 'paginaInicial.dart'; // Importe a página inicial aqui, substitua pelo nome correto do arquivo
 
 class LoginPage extends StatefulWidget {
   @override

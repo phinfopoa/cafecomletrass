@@ -16,14 +16,14 @@ final List<Book> books = [
   Book(
     title: 'Dom Casmurro',
     author: 'Machado de Assis',
-    imagePath: 'domcasmurro.png', // Adicione a imagem ao seu projeto
+    imagePath: 'assets/books/domcasmurro.png', // Adicione a imagem ao seu projeto
     categorie: 'Romance',
   ),
 
    Book(
     title: 'It a Coisa',
     author: 'Stephen King',
-    imagePath: 'itacoisa.png', // Adicione a imagem ao seu projeto
+    imagePath: 'assets/books/itacoisa.png', // Adicione a imagem ao seu projeto
     categorie: 'Terror',
   ),
   // Adicione mais livros aqui
