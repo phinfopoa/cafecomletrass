@@ -20,4 +20,16 @@ class CadastroRepository {
     }
     return null;
   }
+
+  Future<int> updateUser(User user) async {
+    final db = await DBHelper().database;
+    return await db.update(
+      'users',
+      {
+        'password': user.password,
+      },
+      where: 'username = ?',
+      whereArgs: [user.username],
+    );
+  }
 }

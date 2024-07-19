@@ -17,8 +17,15 @@ class _CadastroPageState extends State<CadastroPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cadastro'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        title: Text('Cadastro', style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.black,
+        iconTheme: IconThemeData(color: Colors.white),
       ),
       backgroundColor: Colors.black,
       body: Center(
@@ -39,7 +46,7 @@ class _CadastroPageState extends State<CadastroPage> {
                 ),
                 SizedBox(height: 20),
                 Container(
-                  width: 300, // Define a largura desejada
+                  width: 300,
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: TextFormField(
                     controller: _emailController,
@@ -62,7 +69,7 @@ class _CadastroPageState extends State<CadastroPage> {
                   ),
                 ),
                 Container(
-                  width: 300, // Define a largura desejada
+                  width: 300,
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: TextFormField(
                     controller: _passwordController,
@@ -89,12 +96,11 @@ class _CadastroPageState extends State<CadastroPage> {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: SizedBox(
-                    width: 100, // Define a largura desejada para o botão
+                    width: 300,
                     child: ElevatedButton(
                       onPressed: _register,
                       child: Text('Cadastrar'),
                       style: ElevatedButton.styleFrom(
-                        
                         padding: EdgeInsets.symmetric(vertical: 15),
                         textStyle: TextStyle(fontSize: 18),
                       ),
@@ -111,19 +117,26 @@ class _CadastroPageState extends State<CadastroPage> {
 
   void _register() async {
     if (_formKey.currentState!.validate()) {
-      User newUser = User(
-        username: _emailController.text,
-        password: _passwordController.text,
-      );
+      User? existingUser = await _repository.getUser(_emailController.text);
+      if (existingUser != null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Email já cadastrado')),
+        );
+      } else {
+        User newUser = User(
+          username: _emailController.text,
+          password: _passwordController.text,
+        );
 
-      await _repository.insertUser(newUser);
+        await _repository.insertUser(newUser);
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Usuário cadastrado com sucesso!')),
-      );
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Usuário cadastrado com sucesso!')),
+        );
 
-      _emailController.clear();
-      _passwordController;
+        _emailController.clear();
+        _passwordController.clear();
+      }
     }
-    }
-    }
+  }
+}

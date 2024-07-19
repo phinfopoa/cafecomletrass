@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:proj_curso/RedefinirSenhaPage.dart';
 import 'cadastro_repository.dart';
 import 'cadastro_user.dart';
-import 'paginaInicial.dart'; // Importe a página inicial aqui, substitua pelo nome correto do arquivo
+import 'paginaInicial.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -33,10 +34,10 @@ class _LoginPageState extends State<LoginPage> {
               ),
               TextFormField(
                 controller: _emailController,
-                decoration: InputDecoration( 
+                decoration: InputDecoration(
                   labelText: 'Email',
                   border: OutlineInputBorder(),
-                  labelStyle: TextStyle(color: Colors.white), // Cor do texto do rótulo
+                  labelStyle: TextStyle(color: Colors.white),
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.white),
                   ),
@@ -44,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
                     borderSide: BorderSide(color: Colors.white),
                   ),
                 ),
-                style: TextStyle(color: Colors.white), // Cor do texto digitado
+                style: TextStyle(color: Colors.white),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Por favor, insira o seu Email';
@@ -52,15 +53,13 @@ class _LoginPageState extends State<LoginPage> {
                   return null;
                 },
               ),
-              SizedBox(
-                height: 20,
-              ),
+              SizedBox(height: 20),
               TextFormField(
                 controller: _passwordController,
                 decoration: InputDecoration(
                   labelText: 'Senha',
                   border: OutlineInputBorder(),
-                  labelStyle: TextStyle(color: Colors.white), // Cor do texto do rótulo
+                  labelStyle: TextStyle(color: Colors.white),
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.white),
                   ),
@@ -69,7 +68,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 obscureText: true,
-                style: TextStyle(color: Colors.white), // Cor do texto digitado
+                style: TextStyle(color: Colors.white),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Por favor, insira a senha';
@@ -77,9 +76,7 @@ class _LoginPageState extends State<LoginPage> {
                   return null;
                 },
               ),
-              SizedBox(
-                height: 20,
-              ),
+              SizedBox(height: 20),
               ElevatedButton(
                 onPressed: _login,
                 child: Text('Entrar'),
@@ -88,11 +85,24 @@ class _LoginPageState extends State<LoginPage> {
                 onPressed: () {
                   Navigator.pushNamed(context, '/cadastro');
                 },
-                child: Text('Não tem uma conta? Cadastre-se aqui', style: TextStyle(color: Color.fromARGB(255, 7, 160, 243))),
+                child: Text(
+                  'Não tem uma conta? Cadastre-se aqui',
+                  style: TextStyle(color: Color.fromARGB(255, 7, 160, 243)),
+                ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[],
+              TextButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => RedefinirSenhaPage(),
+                    ),
+                  );
+                },
+                child: Text(
+                  'Esqueceu a senha? Redefinir',
+                  style: TextStyle(color: Color.fromARGB(255, 7, 160, 243)),
+                ),
               ),
             ],
           ),
@@ -110,10 +120,9 @@ class _LoginPageState extends State<LoginPage> {
           SnackBar(content: Text('Login realizado com sucesso!')),
         );
 
-        // Navegar para a página inicial após o login bem-sucedido
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => PaginaInicial(),), // Substitua PaginaInicial pelo nome correto da sua classe
+          MaterialPageRoute(builder: (context) => PaginaInicial()),
         );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
