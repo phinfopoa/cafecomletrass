@@ -26,5 +26,12 @@ final List<Book> books = [
     imagePath: 'assets/books/itacoisa.png', // Adicione a imagem ao seu projeto
     categorie: 'Terror',
   ),
+
+   Book(
+    title: 'Harry Potter e a Pedra Filosofal',
+    author: 'J. K. Rowling',
+    imagePath: 'assets/books/pedrafilosofal.png', // Adicione a imagem ao seu projeto
+    categorie: 'Aventura',
+  ),
   // Adicione mais livros aqui
 ];
