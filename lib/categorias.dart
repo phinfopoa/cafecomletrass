@@ -1,15 +1,19 @@
-// lib/categoria_toggle_buttons.dart
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class Categorias extends StatefulWidget {
+  final Function(String) onCategorySelected;
+
+  Categorias({required this.onCategorySelected});
+
   @override
   _CategoriasState createState() => _CategoriasState();
 }
 
 class _CategoriasState extends State<Categorias> {
   List<bool> isSelected = [true, false, false, false];
+
+  final List<String> categories = ['Todos', 'Aventura', 'Terror', 'Romance'];
 
   @override
   Widget build(BuildContext context) {
@@ -34,14 +38,10 @@ class _CategoriasState extends State<Categorias> {
             for (int i = 0; i < isSelected.length; i++) {
               isSelected[i] = i == index;
             }
+            widget.onCategorySelected(categories[index]);
           });
         },
-        children: <Widget>[
-          Text('Todos'),
-          Text('Aventura'),
-          Text('Terror'),
-          Text('Romance'),
-        ],
+        children: categories.map((category) => Text(category)).toList(),
       ),
     );
   }

@@ -4,8 +4,27 @@ import 'package:proj_curso/bookData.dart';
 import 'package:proj_curso/buttomNavBar.dart';
 import 'package:proj_curso/categorias.dart';
 
-class PaginaInicial extends StatelessWidget {
+class PaginaInicial extends StatefulWidget {
   const PaginaInicial({super.key});
+
+  @override
+  _PaginaInicialState createState() => _PaginaInicialState();
+}
+
+class _PaginaInicialState extends State<PaginaInicial> {
+  String selectedCategory = 'Todos';
+  List<Book> filteredBooks = books;
+
+  void filterBooks(String category) {
+    setState(() {
+      selectedCategory = category;
+      if (category == 'Todos') {
+        filteredBooks = books;
+      } else {
+        filteredBooks = books.where((book) => book.categorie == category).toList();
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +51,7 @@ class PaginaInicial extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: Wrap(
                   children: [
-                    Categorias(),
+                    Categorias(onCategorySelected: filterBooks),
                   ],
                 ),
               ),
@@ -45,9 +64,9 @@ class PaginaInicial extends StatelessWidget {
                     mainAxisSpacing: 8,
                     childAspectRatio: 3 / 2,
                   ),
-                  itemCount: books.length,
+                  itemCount: filteredBooks.length,
                   itemBuilder: (context, index) {
-                    final book = books[index];
+                    final book = filteredBooks[index];
                     return BookCard(
                       title: book.title,
                       author: book.author,
