@@ -21,7 +21,8 @@ class _PaginaInicialState extends State<PaginaInicial> {
       if (category == 'Todos') {
         filteredBooks = books;
       } else {
-        filteredBooks = books.where((book) => book.categorie == category).toList();
+        filteredBooks =
+            books.where((book) => book.categorie == category).toList();
       }
     });
   }
@@ -72,6 +73,7 @@ class _PaginaInicialState extends State<PaginaInicial> {
                       author: book.author,
                       imagePath: book.imagePath,
                       categorie: book.categorie,
+                      synopsis: book.synopsis,
                     );
                   },
                 ),

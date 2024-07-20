@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:proj_curso/paginaInicial.dart';
 import 'login.dart';
@@ -13,7 +12,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Café com Letras',
-      
       initialRoute: '/',
       routes: {
         '/': (context) => LoginPage(),

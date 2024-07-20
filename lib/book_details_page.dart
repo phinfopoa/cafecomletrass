@@ -21,10 +21,17 @@ class BookDetailsPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        title: Text(title),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.grey),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        title: const Text('detalhe', style: TextStyle(color: Colors.grey)),
         backgroundColor: Colors.black,
+        elevation: 0,
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -37,51 +44,86 @@ class BookDetailsPage extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Text(
-              'Autor: $author',
-              style: TextStyle(
-                fontSize: 18,
-                color: Colors.white,
-              ),
-            ),
-            SizedBox(height: 10),
-            Text(
-              'Gênero: $categorie',
-              style: TextStyle(
-                fontSize: 18,
-                color: Colors.white,
-              ),
-            ),
-            SizedBox(height: 20),
-            Text(
-              'Sinopse:',
-              style: TextStyle(
-                fontSize: 18,
+              title,
+              style: const TextStyle(
+                fontSize: 24,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
             ),
-            SizedBox(height: 10),
+            Text(
+              author,
+              style: const TextStyle(
+                fontSize: 20,
+                color: Colors.grey,
+              ),
+            ),
+            const SizedBox(height: 10),
+            Row(
+              children: categorie.split(', ').map((genre) {
+                return Container(
+                  margin: const EdgeInsets.only(right: 8.0),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 10.0, vertical: 5.0),
+                  decoration: BoxDecoration(
+                    color: Colors.purple,
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  child: Text(
+                    genre,
+                    style: const TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                );
+              }).toList(),
+            ),
+            const SizedBox(height: 20),
             Text(
               synopsis,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16,
                 color: Colors.white,
               ),
             ),
-            Spacer(),
-            Center(
-              child: ElevatedButton(
-                onPressed: () {
-                  // Implementar a lógica de reserva aqui
-                },
-                child: Text('Reservar'),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue, // Cor do botão
+            const SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton.icon(
+                  onPressed: () {
+                    // Implementar a lógica de reserva aqui
+                  },
+                  icon: const Icon(Icons.bookmark_add),
+                  label: const Text('Reservar'),
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: Colors.white,
+                    backgroundColor: Colors.purple,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                  ),
                 ),
-              ),
+                const SizedBox(width: 16),
+                ElevatedButton.icon(
+                  onPressed: () {
+                    // Implementar a lógica de favoritar aqui
+                  },
+                  icon: const Icon(Icons.favorite_border),
+                  label: const Text('Favoritar'),
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: Colors.white,
+                    backgroundColor: Colors.grey[800],
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                  ),
+                ),
+              ],
             ),
+            const SizedBox(height: 20),
           ],
         ),
       ),

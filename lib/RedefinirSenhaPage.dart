@@ -16,9 +16,7 @@ class _RedefinirSenhaPageState extends State<RedefinirSenhaPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       appBar: AppBar(
-        
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
@@ -129,4 +127,3 @@ class _RedefinirSenhaPageState extends State<RedefinirSenhaPage> {
     }
   }
 }
-

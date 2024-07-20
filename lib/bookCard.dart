@@ -6,6 +6,7 @@ class BookCard extends StatelessWidget {
   final String author;
   final String imagePath;
   final String categorie;
+  final String synopsis;
 
   const BookCard({
     Key? key,
@@ -13,6 +14,7 @@ class BookCard extends StatelessWidget {
     required this.author,
     required this.imagePath,
     required this.categorie,
+    required this.synopsis,
   }) : super(key: key);
 
   @override
@@ -27,7 +29,7 @@ class BookCard extends StatelessWidget {
               author: author,
               imagePath: imagePath,
               categorie: categorie,
-              synopsis: 'Sinopse do livro aqui', // Substitua com a sinopse real
+              synopsis: synopsis, // Substitua com a sinopse real
             ),
           ),
         );

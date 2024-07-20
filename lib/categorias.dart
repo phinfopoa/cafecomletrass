@@ -30,7 +30,7 @@ class _CategoriasState extends State<Categorias> {
         constraints: BoxConstraints(
           minHeight: 40.0,
           // Calcular a largura mínima do botão para ocupar a tela inteira
-          minWidth: screenWidth / isSelected.length -1.3,
+          minWidth: screenWidth / isSelected.length - 1.3,
         ),
         isSelected: isSelected,
         onPressed: (int index) {
