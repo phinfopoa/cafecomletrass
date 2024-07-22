@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:proj_curso/bookData.dart';
+import 'bookData.dart';
 
 class ReservasProvider with ChangeNotifier {
   final List<Book> _reservas = [];
@@ -24,14 +24,14 @@ class ReservasProvider with ChangeNotifier {
     }
 
     _reservas.add(book);
-    _addNotification("Livro reservado: ${book.title}, ${book.author}");
+    _addNotification("Você reservou: ${book.title} por ${book.author}");
     notifyListeners();
     return "Livro reservado com sucesso.";
   }
 
   void removerReserva(Book book) {
     _reservas.remove(book);
-    _addNotification("Livro devolvido: ${book.title}, ${book.author}");
+    _addNotification("Você devolveu: ${book.title} por ${book.author}");
     notifyListeners();
   }
 
@@ -41,6 +41,7 @@ class ReservasProvider with ChangeNotifier {
         "${now.day}/${now.month}/${now.year} ${now.hour}:${now.minute}";
     _notifications.add("[$formattedDate] $message");
     _hasUnreadNotifications = true;
+    notifyListeners();
   }
 
   void markNotificationsAsRead() {

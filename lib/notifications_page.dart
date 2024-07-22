@@ -12,8 +12,10 @@ class _NotificationsPageState extends State<NotificationsPage> {
   @override
   void initState() {
     super.initState();
-    Provider.of<ReservasProvider>(context, listen: false)
-        .markNotificationsAsRead();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<ReservasProvider>(context, listen: false)
+          .markNotificationsAsRead();
+    });
   }
 
   @override
@@ -21,6 +23,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
     final notifications = Provider.of<ReservasProvider>(context).notifications;
 
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
         title:
             const Text('Notificações', style: TextStyle(color: Colors.white)),
