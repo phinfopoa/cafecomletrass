@@ -11,16 +11,16 @@ dependencies:
     sdk: flutter
   sqflite: ^2.0.0+4
   path_provider: ^2.0.5
+  provider: ^6.0.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  
- 
 
 flutter:
   uses-material-design: true
   assets:
-  - assets/books/itacoisa.png
-  - assets/books/domcasmurro.png
-  - assets/books/pedrafilosofal.png
+    - assets/books/itacoisa.png
+    - assets/books/domcasmurro.png
+    - assets/books/pedrafilosofal.png
+    - assets/books/frank.png
