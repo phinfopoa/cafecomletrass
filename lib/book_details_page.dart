@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:proj_curso/bookData.dart';
+import 'package:provider/provider.dart';
+import 'reservas_provider.dart';
 
 class BookDetailsPage extends StatelessWidget {
   final String title;
@@ -27,7 +30,7 @@ class BookDetailsPage extends StatelessWidget {
             Navigator.of(context).pop();
           },
         ),
-        title: const Text('detalhe', style: TextStyle(color: Colors.grey)),
+        title: const Text('Detalhe', style: TextStyle(color: Colors.grey)),
         backgroundColor: Colors.black,
         elevation: 0,
       ),
@@ -94,7 +97,33 @@ class BookDetailsPage extends StatelessWidget {
               children: [
                 ElevatedButton.icon(
                   onPressed: () {
-                    // Implementar a lógica de reserva aqui
+                    final reservasProvider =
+                        Provider.of<ReservasProvider>(context, listen: false);
+                    final book = Book(
+                      title: title,
+                      author: author,
+                      imagePath: imagePath,
+                      categorie: categorie,
+                      synopsis: synopsis,
+                    );
+                    final message = reservasProvider.adicionarReserva(book);
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: Text('Reserva'),
+                          content: Text(message),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Text('OK'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
                   },
                   icon: const Icon(Icons.bookmark_add),
                   label: const Text('Reservar'),
