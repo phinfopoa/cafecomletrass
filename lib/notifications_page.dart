@@ -38,10 +38,14 @@ class _NotificationsPageState extends State<NotificationsPage> {
           : ListView.builder(
               itemCount: notifications.length,
               itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(notifications[index],
-                      style: TextStyle(color: Colors.white)),
-                  leading: Icon(Icons.notifications, color: Colors.white),
+                return Card(
+                  color: Colors.grey[850],
+                  margin: const EdgeInsets.all(10.0),
+                  child: ListTile(
+                    title: Text(notifications[index],
+                        style: TextStyle(color: Colors.white)),
+                    leading: Icon(Icons.notifications, color: Colors.white),
+                  ),
                 );
               },
             ),

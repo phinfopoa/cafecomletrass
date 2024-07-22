@@ -39,5 +39,13 @@ final List<Book> books = [
     synopsis:
         'Harry Potter e a Pedra Filosofal, de J.K. Rowling, é o primeiro livro da série Harry Potter. Ele conta a história de um garoto órfão de 11 anos que descobre ser um bruxo e é convidado a estudar na Escola de Magia e Bruxaria de Hogwarts. Harry é famoso no mundo bruxo por ter sobrevivido a um ataque do poderoso bruxo das trevas Voldemort quando era bebê. Na escola, ele faz amigos leais como Hermione Granger e Ron Weasley, e enfrenta desafios mágicos. Juntos, eles descobrem os segredos da Pedra Filosofal, um objeto lendário que confere imortalidade, e enfrentam o retorno iminente de Voldemort. O livro é uma introdução encantadora ao mundo mágico de Hogwarts, cheio de aventuras, mistérios e lições sobre amizade e coragem.',
   ),
+
+  Book(
+      title: 'Frankenstein',
+      author: 'Mary Shelley',
+      imagePath: 'assets/books/frank.png',
+      categorie: 'Terror',
+      synopsis:
+          'Frankenstein, de Mary Shelley, é um romance gótico que conta a história de Victor Frankenstein, um jovem cientista que, obcecado pelo desejo de criar vida, constrói uma criatura a partir de partes de corpos mortos. No entanto, a experiência dá errado e a criatura se torna um ser monstruoso, rejeitado e isolado, que busca vingança contra seu criador e a sociedade que o excluiu. A obra explora temas de ambição desmedida, responsabilidade moral e as consequências da interferência humana na natureza. A busca de Victor por redenção e a luta da criatura por aceitação revelam os horrores e as complexidades da criação e da rejeição.'),
   // Adicione mais livros aqui
 ];

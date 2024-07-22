@@ -138,7 +138,25 @@ class BookDetailsPage extends StatelessWidget {
                 const SizedBox(width: 16),
                 ElevatedButton.icon(
                   onPressed: () {
-                    // Implementar a lógica de favoritar aqui
+                    final reservasProvider =
+                        Provider.of<ReservasProvider>(context, listen: false);
+                    final book = Book(
+                      title: title,
+                      author: author,
+                      imagePath: imagePath,
+                      categorie: categorie,
+                      synopsis: synopsis,
+                    );
+                    reservasProvider.adicionarFavorito(book);
+
+                    // Exibir um SnackBar para informar o usuário
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Você favoritou este livro!'),
+                        backgroundColor: Colors.green,
+                        duration: Duration(seconds: 2),
+                      ),
+                    );
                   },
                   icon: const Icon(Icons.favorite_border),
                   label: const Text('Favoritar'),

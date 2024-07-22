@@ -3,22 +3,22 @@ import 'bookData.dart';
 
 class ReservasProvider with ChangeNotifier {
   final List<Book> _reservas = [];
+  final List<Book> _favoritos = [];
   final List<String> _notifications = [];
   bool _hasUnreadNotifications = false;
   static const int maxReservas = 2;
 
   List<Book> get reservas => _reservas;
+  List<Book> get favoritos => _favoritos;
   List<String> get notifications => _notifications;
   bool get hasUnreadNotifications => _hasUnreadNotifications;
 
   String adicionarReserva(Book book) {
-    // Verifica se o livro já está reservado
     if (_reservas
         .any((b) => b.title == book.title && b.author == book.author)) {
       return "Este livro já está reservado.";
     }
 
-    // Verifica o limite de reservas
     if (_reservas.length >= maxReservas) {
       return "Você só pode reservar até $maxReservas livros.";
     }
@@ -32,6 +32,25 @@ class ReservasProvider with ChangeNotifier {
   void removerReserva(Book book) {
     _reservas.remove(book);
     _addNotification("Você devolveu: ${book.title} por ${book.author}");
+    notifyListeners();
+  }
+
+  void adicionarFavorito(Book book) {
+    if (_favoritos
+        .any((b) => b.title == book.title && b.author == book.author)) {
+      return;
+    }
+
+    _favoritos.add(book);
+    _addNotification(
+        "Você adicionou aos favoritos: ${book.title} por ${book.author}");
+    notifyListeners();
+  }
+
+  void removerFavorito(Book book) {
+    _favoritos.remove(book);
+    _addNotification(
+        "Você removeu dos favoritos: ${book.title} por ${book.author}");
     notifyListeners();
   }
 

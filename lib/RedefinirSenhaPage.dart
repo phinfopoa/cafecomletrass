@@ -61,6 +61,11 @@ class _RedefinirSenhaPageState extends State<RedefinirSenhaPage> {
                   if (value == null || value.isEmpty) {
                     return 'Por favor, insira o seu Email';
                   }
+                  // Regex para validar o formato do email
+                  final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+$');
+                  if (!emailRegex.hasMatch(value)) {
+                    return 'O email deve conter "@" e "."';
+                  }
                   return null;
                 },
               ),
@@ -83,6 +88,10 @@ class _RedefinirSenhaPageState extends State<RedefinirSenhaPage> {
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Por favor, insira a nova senha';
+                  }
+                  // Verificar se a nova senha tem mais de 6 caracteres
+                  if (value.length <= 6) {
+                    return 'A nova senha deve ter mais de 6 caracteres';
                   }
                   return null;
                 },

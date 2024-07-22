@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:proj_curso/bookCard.dart';
 import 'package:proj_curso/bookData.dart';
 import 'package:proj_curso/buttomNavBar.dart';
+import 'package:proj_curso/searchBar.dart';
 
 import 'categorias.dart'; // Importe o Categorias
 
@@ -13,15 +14,30 @@ class PaginaInicial extends StatefulWidget {
 class _PaginaInicialState extends State<PaginaInicial> {
   String selectedCategory = 'Todos';
   List<Book> filteredBooks = books;
+  List<Book> allBooks = books;
 
   void filterBooks(String category) {
     setState(() {
       selectedCategory = category;
       if (category == 'Todos') {
-        filteredBooks = books;
+        filteredBooks = allBooks;
       } else {
         filteredBooks =
-            books.where((book) => book.categorie == category).toList();
+            allBooks.where((book) => book.categorie == category).toList();
+      }
+    });
+  }
+
+  void searchBooks(String query) {
+    setState(() {
+      if (query.isEmpty) {
+        filteredBooks = allBooks;
+      } else {
+        filteredBooks = allBooks
+            .where((book) =>
+                book.title.toLowerCase().contains(query.toLowerCase()) ||
+                book.author.toLowerCase().contains(query.toLowerCase()))
+            .toList();
       }
     });
   }
@@ -30,7 +46,6 @@ class _PaginaInicialState extends State<PaginaInicial> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -39,7 +54,7 @@ class _PaginaInicialState extends State<PaginaInicial> {
             // Adiciona a barra de pesquisa
             Container(
               width: double.infinity,
-              child: SearchBar(),
+              child: SearchBart(onSearch: searchBooks),
             ),
             SizedBox(height: 20),
             // Adiciona os botões de categorias
@@ -73,8 +88,7 @@ class _PaginaInicialState extends State<PaginaInicial> {
           ],
         ),
       ),
-      bottomNavigationBar:
-          BottomNavBar(), // Adiciona o BottomNavBar sem parâmetros
+      bottomNavigationBar: BottomNavBar(),
     );
   }
 }

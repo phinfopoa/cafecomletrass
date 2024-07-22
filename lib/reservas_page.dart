@@ -1,71 +1,125 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'reservas_provider.dart';
-import 'buttomNavBar.dart'; // Importe o BottomNavBar
+import 'buttomNavBar.dart';
 
 class ReservasPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final reservasProvider = Provider.of<ReservasProvider>(context);
+    final reservas = reservasProvider.reservas;
+    final favoritos = reservasProvider.favoritos;
 
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        title: const Text('Reservas', style: TextStyle(color: Colors.white)),
+        title: Text('', style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.black,
         elevation: 0,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: reservasProvider.reservas.isEmpty
-            ? Center(
-                child: Text(
-                  'Nenhum livro reservado.',
-                  style: TextStyle(color: Colors.white),
-                ),
-              )
-            : ListView.builder(
-                itemCount: reservasProvider.reservas.length,
-                itemBuilder: (context, index) {
-                  final book = reservasProvider.reservas[index];
-                  return Card(
-                    color: Colors.grey[850],
-                    margin: const EdgeInsets.only(bottom: 16.0),
-                    child: ListTile(
-                      contentPadding: const EdgeInsets.all(16.0),
-                      leading: Image.asset(
-                        book.imagePath,
-                        width: 60,
-                        height: 90,
-                        fit: BoxFit.cover,
-                      ),
-                      title: Text(
-                        book.title,
-                        style: const TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold),
-                      ),
-                      subtitle: Text(
-                        book.author,
-                        style: const TextStyle(color: Colors.grey),
-                      ),
-                      trailing: IconButton(
-                        icon: const Icon(Icons.delete, color: Colors.red),
-                        onPressed: () {
-                          reservasProvider.removerReserva(book);
-                        },
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16.0),
+              child: Text('Reservas',
+                  style: TextStyle(fontSize: 24, color: Colors.white)),
+            ),
+            reservas.isEmpty
+                ? Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Text(
+                        'Nenhuma reserva',
+                        style: TextStyle(color: Colors.white),
                       ),
                     ),
-                  );
-                },
-              ),
+                  )
+                : ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: reservas.length,
+                    itemBuilder: (context, index) {
+                      final book = reservas[index];
+                      return Card(
+                        color: Colors.grey[850],
+                        margin: const EdgeInsets.all(10.0),
+                        child: ListTile(
+                          leading: Image.asset(book.imagePath,
+                              height: 50, width: 50, fit: BoxFit.cover),
+                          title: Text(book.title,
+                              style: TextStyle(color: Colors.white)),
+                          subtitle: Text(book.author,
+                              style: TextStyle(color: Colors.grey)),
+                          trailing: ElevatedButton(
+                            onPressed: () {
+                              reservasProvider.removerReserva(book);
+                            },
+                            style: ElevatedButton.styleFrom(
+                              foregroundColor: Colors.white,
+                              backgroundColor: Colors.red, // Text color
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                            ),
+                            child: Text('Devolver'),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16.0),
+              child: Text('Favoritos',
+                  style: TextStyle(fontSize: 24, color: Colors.white)),
+            ),
+            favoritos.isEmpty
+                ? Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Text(
+                        'Nenhum favorito',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  )
+                : ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: favoritos.length,
+                    itemBuilder: (context, index) {
+                      final book = favoritos[index];
+                      return Card(
+                        color: Colors.grey[850],
+                        margin: const EdgeInsets.all(10.0),
+                        child: ListTile(
+                          leading: Image.asset(book.imagePath,
+                              height: 50, width: 50, fit: BoxFit.cover),
+                          title: Text(book.title,
+                              style: TextStyle(color: Colors.white)),
+                          subtitle: Text(book.author,
+                              style: TextStyle(color: Colors.grey)),
+                          trailing: ElevatedButton(
+                            onPressed: () {
+                              reservasProvider.removerFavorito(book);
+                            },
+                            style: ElevatedButton.styleFrom(
+                              foregroundColor: Colors.white,
+                              backgroundColor: Colors.red, // Text color
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                            ),
+                            child: Text('Remover'),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+          ],
+        ),
       ),
-      bottomNavigationBar: BottomNavBar(), // Adiciona o BottomNavBar
+      bottomNavigationBar: BottomNavBar(),
     );
   }
 }

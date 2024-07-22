@@ -64,6 +64,11 @@ class _CadastroPageState extends State<CadastroPage> {
                       if (value == null || value.isEmpty) {
                         return 'Por favor, insira o seu email';
                       }
+                      // Regex para validar o formato do email
+                      final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+$');
+                      if (!emailRegex.hasMatch(value)) {
+                        return 'O email deve conter "@" e "."';
+                      }
                       return null;
                     },
                   ),
@@ -87,6 +92,10 @@ class _CadastroPageState extends State<CadastroPage> {
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Por favor, insira a senha';
+                      }
+                      // Verificar se a senha tem mais de 6 caracteres
+                      if (value.length <= 6) {
+                        return 'A senha deve ter mais de 6 caracteres';
                       }
                       return null;
                     },
