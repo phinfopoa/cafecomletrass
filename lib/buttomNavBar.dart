@@ -13,6 +13,7 @@ class BottomNavBar extends StatelessWidget {
     final navigationProvider = Provider.of<NavigationProvider>(context);
     final hasUnreadNotifications =
         Provider.of<ReservasProvider>(context).hasUnreadNotifications;
+    // Obtém os provedores de navegação e reservas.
 
     return Theme(
       data: ThemeData(
@@ -22,26 +23,34 @@ class BottomNavBar extends StatelessWidget {
           bodySmall: TextStyle(color: Colors.grey),
         ),
       ),
+      // Define o tema da barra de navegação .
+
       child: BottomNavigationBar(
         backgroundColor: Colors.black,
         unselectedItemColor: Colors.grey,
         selectedItemColor: Colors.white,
         currentIndex: navigationProvider.selectedIndex,
         onTap: (index) {
-          navigationProvider.setIndex(index); // Atualiza o índice selecionado
+          navigationProvider.setIndex(index); // Atualiza o índice selecionado.
           _onItemTapped(context, index);
         },
+        // Configura a aparência e o comportamento da barra de navegação inferior.
+
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Inicio',
             tooltip: 'Página Inicial',
           ),
+          // Item para a página inicial.
+
           BottomNavigationBarItem(
-            icon: Icon(Icons.search), // Ícone de pesquisa
+            icon: Icon(Icons.search), // Ícone de pesquisa.
             label: 'Buscar',
             tooltip: 'Buscar Livros',
           ),
+          // Item  para a página de busca.
+
           BottomNavigationBarItem(
             icon: Stack(
               children: [
@@ -74,11 +83,14 @@ class BottomNavBar extends StatelessWidget {
             label: 'Notificações',
             tooltip: 'Notificações',
           ),
+          // Item  para a página de notificações, com indicador de novas notificações.
+
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: 'Reservas',
             tooltip: 'Reservas',
           ),
+          // Item para a página de reservas.
         ],
       ),
     );
@@ -112,4 +124,5 @@ class BottomNavBar extends StatelessWidget {
         break;
     }
   }
+  // Método que navega para diferentes páginas com base no índice selecionado na barra de navegação.
 }

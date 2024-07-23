@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'book_details_page.dart'; // Importar a página de detalhes
+import 'book_details_page.dart'; // Importa a página de detalhes do livro.
 
 class BookCard extends StatelessWidget {
   final String title;
@@ -7,6 +7,7 @@ class BookCard extends StatelessWidget {
   final String imagePath;
   final String categorie;
   final String synopsis;
+  //  propriedades do card  livro.
 
   const BookCard({
     Key? key,
@@ -16,6 +17,7 @@ class BookCard extends StatelessWidget {
     required this.categorie,
     required this.synopsis,
   }) : super(key: key);
+  // Construtor  com valores obrigatórios.
 
   @override
   Widget build(BuildContext context) {
@@ -29,17 +31,21 @@ class BookCard extends StatelessWidget {
               author: author,
               imagePath: imagePath,
               categorie: categorie,
-              synopsis: synopsis, // Substitua com a sinopse real
+              synopsis: synopsis, // sinopse real
             ),
           ),
         );
       },
+      // Define um GestureDetector para detectar toques no cartão e navegar para a página de detalhes do livro.
+
       child: Card(
         elevation: 5,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),
         clipBehavior: Clip.antiAlias,
+        // Define a aparência do cartão com elevação e bordas arredondadas.
+
         child: Stack(
           children: [
             Image.asset(
@@ -48,6 +54,8 @@ class BookCard extends StatelessWidget {
               height: double.infinity,
               fit: BoxFit.cover,
             ),
+            // imagem do livro que cobre todo o cartão.
+
             Container(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -57,6 +65,8 @@ class BookCard extends StatelessWidget {
                 ),
               ),
             ),
+            // Adiciona um gradiente preto transparente na parte inferior do card para melhorar a legibilidade do texto.
+
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
@@ -71,6 +81,8 @@ class BookCard extends StatelessWidget {
                       color: Colors.white,
                     ),
                   ),
+                  // Exibe o título do livro.
+
                   Text(
                     author,
                     style: TextStyle(
@@ -78,6 +90,8 @@ class BookCard extends StatelessWidget {
                       color: Colors.white,
                     ),
                   ),
+                  // Exibe o autor do livro.
+
                   Text(
                     categorie,
                     style: TextStyle(
@@ -85,9 +99,11 @@ class BookCard extends StatelessWidget {
                       color: Colors.white,
                     ),
                   ),
+                  // Exibe a categoria do livro.
                 ],
               ),
             ),
+            // Adiciona o texto do título, autor e categoria na parte inferior do cartão.
           ],
         ),
       ),

@@ -5,6 +5,7 @@ import 'cadastro_user.dart';
 class CadastroPage extends StatefulWidget {
   @override
   _CadastroPageState createState() => _CadastroPageState();
+  // Cria um estado para o widget `CadastroPage`.
 }
 
 class _CadastroPageState extends State<CadastroPage> {
@@ -12,6 +13,7 @@ class _CadastroPageState extends State<CadastroPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _repository = CadastroRepository();
+  // Define chaves e controladores para o formulário, e uma instância do repositório.
 
   @override
   Widget build(BuildContext context) {
@@ -64,12 +66,12 @@ class _CadastroPageState extends State<CadastroPage> {
                       if (value == null || value.isEmpty) {
                         return 'Por favor, insira o seu email';
                       }
-                      // Regex para validar o formato do email
                       final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+$');
                       if (!emailRegex.hasMatch(value)) {
                         return 'O email deve conter "@" e "."';
                       }
                       return null;
+                      // Valida o campo de email e verifica o formato usando Regex.
                     },
                   ),
                 ),
@@ -93,11 +95,11 @@ class _CadastroPageState extends State<CadastroPage> {
                       if (value == null || value.isEmpty) {
                         return 'Por favor, insira a senha';
                       }
-                      // Verificar se a senha tem mais de 6 caracteres
                       if (value.length <= 6) {
                         return 'A senha deve ter mais de 6 caracteres';
                       }
                       return null;
+                      // Valida o campo de senha e verifica se tem mais de 6 caracteres.
                     },
                   ),
                 ),
@@ -131,6 +133,7 @@ class _CadastroPageState extends State<CadastroPage> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Email já cadastrado')),
         );
+        // Verifica se o email já está cadastrado.
       } else {
         User newUser = User(
           username: _emailController.text,
@@ -145,6 +148,7 @@ class _CadastroPageState extends State<CadastroPage> {
 
         _emailController.clear();
         _passwordController.clear();
+        // Cadastra o novo usuário e exibe uma mensagem de sucesso.
       }
     }
   }

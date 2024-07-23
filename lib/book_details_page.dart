@@ -1,14 +1,17 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'; // Importa o pacote principal do Flutter para criar interfaces de usuário.
 import 'package:proj_curso/bookData.dart';
-import 'package:provider/provider.dart';
-import 'reservas_provider.dart';
+import 'package:provider/provider.dart'; // Importa o pacote Provider para gerenciar o estado no aplicativo.
+import 'reservas_provider.dart'; // Importa o arquivo 'reservas_provider.dart', onde está definida a classe 'ReservasProvider'.
 
 class BookDetailsPage extends StatelessWidget {
+  // Define uma página de detalhes do livro
+
   final String title;
   final String author;
   final String imagePath;
   final String categorie;
   final String synopsis;
+  // Declara as propriedades da página de detalhes do livro.
 
   const BookDetailsPage({
     Key? key,
@@ -18,11 +21,14 @@ class BookDetailsPage extends StatelessWidget {
     required this.categorie,
     required this.synopsis,
   }) : super(key: key);
+  // Construtor para valores obrigatórios.
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
+      // Define a cor de fundo da página como preta.
+
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.grey),
@@ -30,10 +36,14 @@ class BookDetailsPage extends StatelessWidget {
             Navigator.of(context).pop();
           },
         ),
+        // botão de voltar na barra de app que fecha a página de detalhes ao ser pressionado.
+
         title: const Text('Detalhe', style: TextStyle(color: Colors.grey)),
         backgroundColor: Colors.black,
         elevation: 0,
+        // Define o título, a cor de fundo e remove a sombra da barra de app.
       ),
+
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -47,7 +57,11 @@ class BookDetailsPage extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
+            //  imagem do livro no centro da página.
+
             const SizedBox(height: 20),
+            // Adiciona um espaço  de 20 pixels.
+
             Text(
               title,
               style: const TextStyle(
@@ -56,6 +70,8 @@ class BookDetailsPage extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
+            // título do livro.
+
             Text(
               author,
               style: const TextStyle(
@@ -63,7 +79,11 @@ class BookDetailsPage extends StatelessWidget {
                 color: Colors.grey,
               ),
             ),
+            // autor do livro.
+
             const SizedBox(height: 10),
+            // Adiciona um espaço  de 10 pixels.
+
             Row(
               children: categorie.split(', ').map((genre) {
                 return Container(
@@ -83,7 +103,11 @@ class BookDetailsPage extends StatelessWidget {
                 );
               }).toList(),
             ),
+            // Divide as categorias em uma lista e exibe cada uma em um contêiner
+
             const SizedBox(height: 20),
+            // Adiciona um espaço  de 20 pixels.
+
             Text(
               synopsis,
               style: const TextStyle(
@@ -91,7 +115,11 @@ class BookDetailsPage extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
+            // Exibe a sinopse do livro.
+
             const SizedBox(height: 20),
+            // Adiciona um espaço de 20 pixels.
+
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -135,7 +163,11 @@ class BookDetailsPage extends StatelessWidget {
                     ),
                   ),
                 ),
+                // Botão para reservar o livro, que exibe um diálogo de confirmação ao ser pressionado.
+
                 const SizedBox(width: 16),
+                // Adiciona um espaço  de 16 pixels.
+
                 ElevatedButton.icon(
                   onPressed: () {
                     final reservasProvider =
@@ -168,9 +200,11 @@ class BookDetailsPage extends StatelessWidget {
                     ),
                   ),
                 ),
+                // Botão para favoritar o livro, que exibe um SnackBar ao ser pressionado.
               ],
             ),
             const SizedBox(height: 20),
+            // Adiciona um espaço  de 20 pixels.
           ],
         ),
       ),
