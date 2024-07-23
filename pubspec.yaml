@@ -1,26 +1,26 @@
 name: proj_curso
-description: "A new Flutter project."
-publish_to: "none"
-version: 0.1.0
+description: "A new Flutter project." # Descrição do projeto.
+publish_to: "none" # Não publica o pacote no pub.dev.
+version: 0.1.0 # Versão inicial do projeto.
 
 environment:
-  sdk: ">=3.0.1 <4.0.0"
+  sdk: ">=3.0.1 <4.0.0" # Define a versão do SDK Flutter que o projeto suporta.
 
 dependencies:
   flutter:
-    sdk: flutter
-  sqflite: ^2.0.0+4
-  path_provider: ^2.0.5
-  provider: ^6.0.3
+    sdk: flutter # Define o Flutter como uma dependência.
+  sqflite: ^2.0.0+4 # Adiciona o pacote sqflite para manipulação de banco de dados SQLite.
+  path_provider: ^2.0.5 # Adiciona o pacote path_provider para encontrar caminhos em arquivos do sistema.
+  provider: ^6.0.3 # Adiciona o pacote provider para gerenciamento de estado.
 
 dev_dependencies:
   flutter_test:
-    sdk: flutter
+    sdk: flutter # Define o pacote flutter_test para testes de unidade e widget.
 
 flutter:
-  uses-material-design: true
-  assets:
-    - assets/books/itacoisa.png
-    - assets/books/domcasmurro.png
-    - assets/books/pedrafilosofal.png
-    - assets/books/frank.png
+  uses-material-design: true # Habilita o uso de design Material.
+  assets: # Define os recursos que serão incluídos no aplicativo.
+    - assets/books/itacoisa.png # Caminho para a imagem do livro "Itacoisa".
+    - assets/books/domcasmurro.png # Caminho para a imagem do livro "Dom Casmurro".
+    - assets/books/pedrafilosofal.png # Caminho para a imagem do livro "Pedra Filosofal".
+    - assets/books/frank.png # Caminho para a imagem do livro "Frank".
